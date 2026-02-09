@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignSpeak - When Hands Speak, The World Listens</title>
+    <style>
+        :root {
+            --primary: #0066FF; /* Electric blue */
+            --secondary: #00BFB3; /* Teal accent */
+            --accent: #FFB800; /* Warm yellow */
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--dark);
+        }
+        
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 28px;
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 6px;
+            font-weight: 500;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #0052cc;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .accessibility-toggle {
+            display: flex;
+            align-items: center;
+            margin-left: 20px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        
+        /* Hero section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.1));
+            color: white;
+            overflow: hidden;
+        }
+        
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding-top: 80px;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-tagline {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+        }
+        
+        /* Problem statement section */
+        .problem {
+            padding: 100px 0;
+            background-color: white;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 4px;
+            background-color: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .problem-cards {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            gap: 30px;
+        }
+        
+        .problem-card {
+            flex: 1;
+            background-color: var(--light);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .problem-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .problem-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .stat {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+        
+        /* How it works section */
+        .how-it-works {
+            padding: 100px 0;
+            background-color: var(--light);
+        }
+        
+        .tech-showcase {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-top: 50px;
+        }
+        
+        .glove-interactive {
+            flex: 1;
+            position: relative;
+        }
+        
+        .glove-base {
+            width: 100%;
+            border-radius: 12px;
+        }
+        
+        .sensor-point {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .sensor-point:hover {
+            transform: scale(1.5);
+        }
+        
+        .sensor-point.finger1 {
+            top: 25%;
+            left: 30%;
+        }
+        
+        .sensor-point.finger2 {
+            top: 15%;
+            left: 45%;
+        }
+        
+        .sensor-point.finger3 {
+            top: 10%;
+            left: 60%;
+        }
+        
+        .sensor-point.arduino {
+            top: 60%;
+            left: 50%;
+        }
+        
+        .sensor-point.speaker {
+            top: 70%;
+            left: 25%;
+        }
+        
+        .tech-details {
+            flex: 1;
+        }
+        
+        .tech-step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        /* Why SignSpeak section */
+        .why-signspeak {
+            padding: 100px 0;
+            background-color: white;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .feature {
+            text-align: center;
+            padding: 40px 20px;
+            border-radius: 12px;
+            transition: all 0.3s;
+            background-color: var(--light);
+        }
+        
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .feature h3 {
+            margin-bottom: 15px;
+        }
+        
+        .comparison-table {
+            margin-top: 60px;
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 15px;
+            text-align: center;
+            border: 1px solid var(--light-gray);
+        }
+        
+        .comparison-table th {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: var(--light);
+        }
+        
+        .check {
+            color: #28a745;
+            font-size: 1.2rem;
+        }
+        
+        .x-mark {
+            color: #dc3545;
+            font-size: 1.2rem;
+        }
+        
+        /* User impact section */
+        .user-impact {
+            padding: 100px 0;
+            background-color: var(--light);
+            text-align: center;
+        }
+        
+        .use-cases {
+            display: flex;
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .use-case {
+            flex: 1;
+            padding: 30px;
+            border-radius: 12px;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: left;
+        }
+        
+        .use-case-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .testimonials {
+            margin-top: 80px;
+        }
+        
+        .testimonial {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .quote {
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.2;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        
+        .author-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        /* Team section */
+        .team {
+            padding: 100px 0;
+            background-color: white;
+            text-align: center;
+        }
+        
+        .team-members {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .team-member {
+            text-align: center;
+        }
+        
+        .team-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .social-link {
+            width: 30px;
+            height: 30px;
+            background-color: var(--light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Join movement section */
+        .join-movement {
+            padding: 100px 0;
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+        }
+        
+        .movement-title:after {
+            background-color: white;
+        }
+        
+        .movement-options {
+            display: flex;
+            gap: 30px;
+            margin-top: 50px;
+            justify-content: center;
+        }
+        
+        .movement-option {
+            flex: 1;
+            max-width: 300px;
+            padding: 40px 30px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+        
+        .movement-option:hover {
+            transform: translateY(-10px);
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .movement-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .btn-light {
+            background-color: white;
+            color: var(--primary);
+            margin-top: 20px;
+        }
+        
+        .btn-light:hover {
+            background-color: var(--light);
+            color: white;
+        }
+        
+        /* Newsletter */
+        .newsletter {
+            max-width: 600px;
+            margin: 60px auto 0;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            height: 50px;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 0 15px;
+            border: none;
+            border-radius: 6px 0 0 6px;
+            font-size: 1rem;
+        }
+        
+        .newsletter-btn {
+            padding: 0 20px;
+            background-color: var(--accent);
+            color: var(--dark);
+            border: none;
+            border-radius: 0 6px 6px 0;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .newsletter-btn:hover {
+            background-color: #e6a700;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+        
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links h4 {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .footer-links h4:after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 3px;
+            background-color: var(--primary);
+            bottom: -8px;
+            left: 0;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            text-decoration: none;
+            color: var(--light-gray);
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-contact p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-icon {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+        
+        .copyright {
+            margin-top: 40px;
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: var(--light-gray);
+        }
+        
+        /* Accessibility features */
+        .high-contrast {
+            --light: #000;
+            --dark: #fff;
+            --light-gray: #333;
+            background-color: #000;
+            color: #fff;
+        }
+        
+        .larger-text {
+            font-size: 1.2rem;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 991px) {
+            .tech-showcase {
+                flex-direction: column;
+            }
+            
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .use-cases {
+                flex-direction: column;
+            }
+            
+            .movement-options {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .problem-cards {
+                flex-direction: column;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-members {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }  
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/js/all.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-hand-paper logo-icon"></i>
+                    Sign<span>Speak</span>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#why-signspeak">Features</a></li>
+                    <li><a href="#user-impact">Impact</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="#join-movement">Join Us</a></li>
+                    <li><a href="#" class="btn btn-outline">Download App</a></li>
+                    <li><a href="#" class="btn">Order Now</a></li>
+                </ul>
+                <div class="accessibility-toggle">
+                    <i class="fas fa-universal-access"></i>
+                </div>
+                <button id="toggle-dark" class="btn btn-outline">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-video">
+            <img src="/Assests/hero.png" alt="Person using SignSpeak glove">
+        </div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>When Hands Speak,<br>the World Listens.</h1>
+                <p class="hero-tagline">Revolutionizing communication for the deaf and hard of hearing community with our innovative smart glove technology.</p>
+                <div class="hero-btns">
+                    <a href="#how-it-works" class="btn">See How It Works</a>
+                    <a href="#" class="btn btn-outline">Order Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Statement -->
+    <section class="problem" id="problem">
+        <div class="container">
+            <h2 class="section-title">Breaking Barriers</h2>
+            <p>Millions of people use sign language as their primary form of communication, yet very few outside the community understand it.</p>
+            
+            <div class="problem-cards">
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <i class="fas fa-comment-slash"></i>
+                    </div>
+                    <div class="stat">70M+</div>
+                    <h3>Deaf People Worldwide</h3>
+                    <p>who use sign language as their primary means of communication face barriers daily.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat">&lt;1%</div>
+                    <h3>of Hearing People</h3>
+                    <p>know sign language, creating widespread communication barriers in education, healthcare, and everyday interactions.</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">
+                        <i class="fas fa-hand-sparkles"></i>
+                    </div>
+                    <div class="stat">300+</div>
+                    <h3>Sign Languages</h3>
+                    <p>exist worldwide, each with their own vocabulary and grammar, highlighting the need for adaptive technology.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <p>SignSpeak translates sign language into text and speech in real-time, creating a seamless communication experience.</p>
+            
+            <div class="tech-showcase">
+                <div class="glove-interactive">
+                    <img src="/Assests/works.png" alt="SignSpeak Smart Glove" class="glove-base">
+                </div>
+                <div class="tech-details">
+                    <div class="tech-step">
+                        <div class="step-number">1</div>
+                        <div>
+                            <h3>Gesture Detection</h3>
+                            <p>Flex sensors detect hand movements and finger positions with high precision, capturing the nuances of sign language gestures.</p>
+                        </div>
+                    </div>
+                    <div class="tech-step">
+                        <div class="step-number">2</div>
+                        <div>
+                            <h3>Translation Processing</h3>
+                            <p>The embedded Arduino microcontroller processes sensor data using our proprietary algorithm to identify and translate gestures into text.</p>
+                        </div>
+                    </div>
+                    <div class="tech-step">
+                        <div class="step-number">3</div>
+                        <div>
+                            <h3>Voice Output</h3>
+                            <p>Translated text is converted to natural-sounding speech through the integrated speaker, creating an instant voice for sign language users.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why SignSpeak -->
+    <section class="why-signspeak" id="why-signspeak">
+        <div class="container">
+            <h2 class="section-title">Why SignSpeak?</h2>
+            <p>Our innovative approach offers distinct advantages over traditional solutions.</p>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Wearable & Portable</h3>
+                    <p>Lightweight design that goes wherever you go, without requiring additional equipment or setup.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-wifi-slash"></i>
+                    </div>
+                    <h3>Works Offline</h3>
+                    <p>No internet connection required - translation happens locally on the device for privacy and reliability.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Real-Time Translation</h3>
+                    <p>Near-instantaneous translation with minimal delay for natural conversation flow.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-battery-full"></i>
+                    </div>
+                    <h3>Long Battery Life</h3>
+                    <p>Up to 12 hours of continuous use on a single charge for all-day reliability.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Adaptive Learning</h3>
+                    <p>Gets better with use, adapting to your unique signing style over time.</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>Multi-Language Support</h3>
+                    <p>Currently supports ASL, BSL and ISL with more languages coming soon.</p>
+                </div>
+            </div>
+            
+            <table class="comparison-table">
+                <tr>
+                    <th>Features</th>
+                    <th>SignSpeak Glove</th>
+                    <th>Camera-Based Systems</th>
+                    <th>Interpreter Services</th>
+                </tr>
+                <tr>
+                    <td>Portability</td>
+                    <td><i class="fas fa-check check"></i></td>
+                    <td><i class="fas fa-times x-mark"></i></td>
+                    <td><i class="fas fa-times x-mark"></i></td>
+                </tr>
+                <tr>
+                    <td>Works Without Internet</td>
+                    <td><i class="fas fa-check check"></i></td>
+                    <td><i class="fas fa-times x-mark"></i></td>
+                    <td><i class="fas fa-times x-mark"></i></td>
+                </tr>
+                <tr>
+                    <td>Privacy Focused</td>
+                    <td><i class="fas fa-check check"></i></td>
+                    <td><i class="fas fa-times x-mark"></i></td>
+                    <td><i class="fas fa-check check"></i></td>
+                </tr>
+                <tr>
+                    <td>Always Available</td>
+                    <td><i class="fas fa-check check"></i></td>
+                    <td><i class="fas fa-check check"></i></td>
+                    <td><i class="fas fa-times x-mark"></i></td>
+                </tr>
+                <tr>
+                    <td>One-Time Cost</td>
+                    <td><i class="fas fa-check check"></i></td>
+                    <td><i class="fas fa-check check"></i></td>
+                    <td><i class="fas fa-times x-mark"></i></td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <!-- User Impact -->
+    <section class="user-impact" id="user-impact">
+        <div class="container">
+            <h2 class="section-title">Real-World Impact</h2>
+            <p>SignSpeak is transforming everyday interactions for our users across various settings.</p>
+            
+            <div class="use-cases">
+                <div class="use-case">
+                    <img src="/Assests/pic1.png" alt="Classroom setting" class="use-case-img">
+                    <h3>Education</h3>
+                    <p>Empowering deaf students to actively participate in mainstream classrooms without relying on interpreters, fostering inclusion and equal educational opportunities.</p>
+                </div>
+                <div class="use-case">
+                    <img src="/Assests/pic2.png" alt="Healthcare setting" class="use-case-img">
+                    <h3>Healthcare</h3>
+                    <p>Enabling clear communication between deaf patients and healthcare providers, ensuring accurate medical information exchange and better care outcomes.</p>
+                </div>
+                <div class="use-case">
+                    <img src="/Assests/pic3.png" alt="Workplace setting" class="use-case-img">
+                    <h3>Workplace</h3>
+                    <p>Breaking down barriers to employment and career advancement by facilitating seamless communication in meetings, presentations, and daily workplace interactions.</p>
+                </div>
+            </div>
+            
+            <div class="testimonials">
+                <div class="testimonial">
+                    <div class="quote">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <p class="testimonial-text">SignSpeak has completely transformed how I interact with my hearing colleagues. For the first time in my career, I can participate in meetings without scheduling an interpreter in advance. The freedom and independence this gives me is invaluable.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team" id="team">
+        <div class="container">
+            <h2 class="section-title">Meet Our Team</h2>
+            <p>The passionate innovators behind SignSpeak are dedicated to creating a more inclusive world.</p>
+            
+            <div class="team-members">
+                <div class="team-member">
+                    <img src="/api/placeholder/150/150" alt="Aditi" class="team-img">
+                    <h3>Aditi</h3>
+                    <p>Hardware Engineer</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="/api/placeholder/150/150" alt="Ayush" class="team-img">
+                    <h3>Ayush</h3>
+                    <p>Software Developer</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="/api/placeholder/150/150" alt="Aeshika" class="team-img">
+                    <h3>Aeshika</h3>
+                    <p>UX Designer</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="/api/placeholder/150/150" alt="Aashi" class="team-img">
+                    <h3>Aashi</h3>
+                    <p>AI Specialist</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-medium"></i></a>
+                    </div>
+                </div>
+                <div class="team-member">
+                    <img src="/api/placeholder/150/150" alt="Ayushi" class="team-img">
+                    <h3>Ayushi</h3>
+                    <p>Product Manager</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Join the Movement -->
+    <section class="join-movement" id="join-movement">
+        <div class="container">
+            <h2 class="section-title movement-title">Join The Movement</h2>
+            <p>Be part of our mission to create a world where language barriers are a thing of the past.</p>
+            
+            <div class="movement-options">
+                <div class="movement-option">
+                    <div class="movement-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>Support</h3>
+                    <p>Help bring SignSpeak to those who need it most through our donation program.</p>
+                    <a href="#" class="btn btn-light">Donate Now</a>
+                </div>
+                <div class="movement-option">
+                    <div class="movement-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Partner</h3>
+                    <p>Organizations and institutions can join us in creating inclusive environments.</p>
+                    <a href="#" class="btn btn-light">Become a Partner</a>
+                </div>
+                <div class="movement-option">
+                    <div class="movement-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Volunteer</h3>
+                    <p>Lend your skills and time to help us expand our impact and reach.</p>
+                    <a href="#" class="btn btn-light">Join Our Team</a>
+                </div>
+            </div>
+            
+            <div class="newsletter">
+                <h3>Stay Updated</h3>
+                <p>Subscribe to our newsletter for the latest updates on SignSpeak.</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your Email Address" class="newsletter-input" required>
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">Sign<span>Speak</span></div>
+                    <p>Empowering communication through innovative technology, bridging the gap between the deaf and hearing communities.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#why-signspeak">Features</a></li>
+                        <li><a href="#user-impact">Impact</a></li>
+                        <li><a href="#team">Team</a></li>
+                        <li><a href="#join-movement">Join Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="#">Product Manual</a></li>
+                        <li><a href="#">App Download</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Support Center</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-envelope contact-icon"></i> hello@signspeak.tech</p>
+                    <p><i class="fas fa-phone contact-icon"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-map-marker-alt contact-icon"></i> 123 Innovation Way, Tech Hub, CA 94043</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 SignSpeak. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Additional pages would be linked here -->
+
+    <script>
+        // Interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Accessibility toggle
+            const accessibilityToggle = document.querySelector('.accessibility-toggle');
+            accessibilityToggle.addEventListener('click', function() {
+                const accessibilityMenu = document.createElement('div');
+                accessibilityMenu.className = 'accessibility-menu';
+                accessibilityMenu.innerHTML = `
+                    <div class="accessibility-option" data-option="contrast">High Contrast</div>
+                    <div class="accessibility-option" data-option="text">Larger Text</div>
+                    <div class="accessibility-option" data-option="voice">Voice Narration</div>
+                `;
+                document.body.appendChild(accessibilityMenu);
+            });
+            
+            // Glove interactive points
+            const sensorPoints = document.querySelectorAll('.sensor-point');
+            sensorPoints.forEach(point => {
+                point.addEventListener('click', function() {
+                    const tooltip = document.createElement('div');
+                    tooltip.className = 'sensor-tooltip';
+                    
+                    if(point.classList.contains('finger1')) {
+                        tooltip.textContent = 'Flex sensor on index finger measures precise bend angles';
+                    } else if(point.classList.contains('finger2')) {
+                        tooltip.textContent = 'Middle finger sensor detects complex sign formations';
+                    } else if(point.classList.contains('finger3')) {
+                        tooltip.textContent = 'Thumb sensor for gesture combinations and controls';
+                    } else if(point.classList.contains('arduino')) {
+                        tooltip.textContent = 'Arduino microcontroller processes sensor data in real-time';
+                    } else if(point.classList.contains('speaker')) {
+                        tooltip.textContent = 'High-quality speaker delivers clear voice output';
+                    }
+                    
+                    point.appendChild(tooltip);
+                    
+                    setTimeout(() => {
+                        tooltip.remove();
+                    }, 3000);
+                });
+            });
+        });
+
+        const toggle = document.getElementById('toggle-dark');
+      toggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+      });
+    </script>
+    <style>
+    body.dark-mode {
+      --primary: #FFB800; /* Make yellow your new primary in dark mode */
+      --secondary: #00BFB3;
+      --accent: #FFD93D;
+      --light: #121212;
+      --dark: #f8f9fa;
+      --gray: #ccc;
+      --light-gray: #333;
+      background-color: var(--light);
+      color: var(--dark);
+  }
+  
+  .dark-mode header,
+  .dark-mode .problem,
+  .dark-mode .how-it-works,
+  .dark-mode .why-signspeak,
+  .dark-mode .user-impact,
+  .dark-mode .team,
+  .dark-mode .join-movement,
+  .dark-mode footer {
+      background-color: var(--light);
+      color: var(--dark);
+  }
+  
+  .dark-mode .btn {
+      background-color: var(--accent);
+      color: var(--dark);
+  }
+  
+  .dark-mode .btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--accent); /* yellow */
+    color: var(--accent); /* yellow */
+}
+
+.dark-mode .btn-outline:hover {
+    background-color: var(--accent);
+    color: var(--dark); /* black text on yellow */
+}
+.dark-mode .user-impact {
+    background-color: #1c1c1c;
+    color: var(--dark); /* usually white in dark mode */
+}
+
+.dark-mode .use-case {
+    background-color: #2a2a2a;
+    color: var(--dark);
+}
+
+.dark-mode .testimonial {
+    background-color: #2a2a2a;
+    color: var(--dark);
+}
+
+
+</style>
+
+    <!-- Additional pages would be linked here -->
+    
+    <!-- Product Page -->
+    <section class="product-page" id="product" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">SignSpeak Smart Glove</h2>
+            <p>Discover the technology that's changing lives through seamless communication.</p>
+            
+            <div class="product-showcase">
+                <div class="product-gallery">
+                    <!-- Product images and video would go here -->
+                </div>
+                
+                <div class="product-details">
+                    <h3>Technical Specifications</h3>
+                    <ul class="specs-list">
+                        <li><strong>Weight:</strong> 85g (ultra-lightweight)</li>
+                        <li><strong>Battery Life:</strong> 12 hours continuous use</li>
+                        <li><strong>Charging Time:</strong> 1.5 hours (USB-C)</li>
+                        <li><strong>Sensors:</strong> 5 flex sensors, 9-axis IMU</li>
+                        <li><strong>Processor:</strong> Custom Arduino-based microcontroller</li>
+                        <li><strong>Connectivity:</strong> Bluetooth 5.0, WiFi (optional)</li>
+                        <li><strong>Speaker:</strong> 2W clear voice output</li>
+                        <li><strong>Water Resistance:</strong> IPX4 splash resistant</li>
+                    </ul>
+                    
+                    <h3>Pricing Options</h3>
+                    <div class="pricing-tiers">
+                        <div class="pricing-tier">
+                            <h4>Standard Package</h4>
+                            <div class="price">$299</div>
+                            <ul>
+                                <li>SignSpeak Smart Glove</li>
+                                <li>Basic App Features</li>
+                                <li>1-Year Warranty</li>
+                                <li>USB-C Charging Cable</li>
+                            </ul>
+                            <a href="#" class="btn">Order Now</a>
+                        </div>
+                        
+                        <div class="pricing-tier featured">
+                            <div class="best-value">Most Popular</div>
+                            <h4>Premium Package</h4>
+                            <div class="price">$399</div>
+                            <ul>
+                                <li>SignSpeak Smart Glove</li>
+                                <li>Premium App Features</li>
+                                <li>2-Year Extended Warranty</li>
+                                <li>Charging Dock</li>
+                                <li>Carrying Case</li>
+                                <li>Priority Support</li>
+                            </ul>
+                            <a href="#" class="btn">Order Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product-faq">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-item">
+                    <div class="faq-question">How accurate is the translation?</div>
+                    <div class="faq-answer">SignSpeak achieves over 95% accuracy for standard ASL signs and commonly used phrases. The accuracy continues to improve as the glove learns your specific signing patterns.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can I customize the voice output?</div>
+                    <div class="faq-answer">Yes, the companion app allows you to select from multiple voice options, adjust speaking speed, and personalize the accent to your preference.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How long does the battery last?</div>
+                    <div class="faq-answer">The SignSpeak glove provides approximately 12 hours of active use on a single charge. Standby time extends to several days with power-saving mode enabled.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Is the glove available in different sizes?</div>
+                    <div class="faq-answer">Yes, SignSpeak comes in small, medium, and large sizes to ensure comfort and accuracy. The glove includes adjustable straps for a snug fit.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Which sign languages are supported?</div>
+                    <div class="faq-answer">Currently, SignSpeak supports American Sign Language (ASL), British Sign Language (BSL), and Indian Sign Language (ISL). We're continuously expanding language support through software updates.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Companion App Page -->
+    <section class="app-page" id="app" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">SignSpeak Companion App</h2>
+            <p>Enhance your SignSpeak experience with our feature-rich mobile application.</p>
+            
+            <div class="app-showcase">
+                <div class="app-screenshots">
+                    <!-- App screenshots would go here -->
+                </div>
+                
+                <div class="app-features">
+                    <div class="app-feature">
+                        <div class="app-feature-icon">
+                            <i class="fas fa-sliders-h"></i>
+                        </div>
+                        <div>
+                            <h3>Personalization</h3>
+                            <p>Customize voice type, speed, and accent to match your preferences. Create personalized sign shortcuts for frequently used phrases.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="app-feature">
+                        <div class="app-feature-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                        <div>
+                            <h3>Conversation History</h3>
+                            <p>Review past conversations and easily export transcripts for reference or record-keeping purposes.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="app-feature">
+                        <div class="app-feature-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <h3>Learning Module</h3>
+                            <p>Interactive tutorials to help you optimize your signing technique for better recognition accuracy.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="app-feature">
+                        <div class="app-feature-icon">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <div>
+                            <h3>Multi-Language Support</h3>
+                            <p>Switch between different sign languages and spoken language outputs with a simple tap.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="app-download">
+                <h3>Download Now</h3>
+                <p>Available for iOS and Android devices</p>
+                <div class="app-buttons">
+                    <a href="#" class="app-button">
+                        <i class="fab fa-apple"></i>
+                        <div>
+                            <small>Download on the</small>
+                            <strong>App Store</strong>
+                        </div>
+                    </a>
+                    <a href="#" class="app-button">
+                        <i class="fab fa-google-play"></i>
+                        <div>
+                            <small>GET IT ON</small>
+                            <strong>Google Play</strong>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NGOs & Institutions Page -->
+    <section class="partners-page" id="partners" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">For Organizations</h2>
+            <p>Partner with SignSpeak to create more inclusive environments in schools, healthcare facilities, and public institutions.</p>
+            
+            <div class="partner-options">
+                <div class="partner-option">
+                    <h3>Educational Institutions</h3>
+                    <p>Empower deaf and hard of hearing students with equal access to education through our specialized school programs.</p>
+                    <ul>
+                        <li>Bulk purchasing options</li>
+                        <li>Teacher training workshops</li>
+                        <li>Classroom integration guides</li>
+                        <li>Student progress tracking</li>
+                    </ul>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+                
+                <div class="partner-option">
+                    <h3>Healthcare Providers</h3>
+                    <p>Improve patient care and communication accessibility in medical settings.</p>
+                    <ul>
+                        <li>Medical terminology expansions</li>
+                        <li>HIPAA-compliant conversation logs</li>
+                        <li>Multiple department setup</li>
+                        <li>Staff training resources</li>
+                    </ul>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+                
+                <div class="partner-option">
+                    <h3>Public Services</h3>
+                    <p>Make government offices, transportation hubs, and public facilities more accessible.</p>
+                    <ul>
+                        <li>Public announcement integration</li>
+                        <li>Service counter setup</li>
+                        <li>Emergency response protocols</li>
+                        <li>ADA compliance support</li>
+                    </ul>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+            
+            <div class="impact-stories">
+                <h3>Success Stories</h3>
+                
+                <div class="impact-story">
+                    <img src="/api/placeholder/200/150" alt="School case study" class="impact-img">
+                    <div>
+                        <h4>Springfield High School</h4>
+                        <p>"Implementing SignSpeak in our classrooms has dramatically improved participation rates among our deaf students and fostered a more inclusive learning environment for everyone."</p>
+                        <p class="impact-author">— Dr. Lisa Chen, Principal</p>
+                    </div>
+                </div>
+                
+                <div class="impact-story">
+                    <img src="/api/placeholder/200/150" alt="Hospital case study" class="impact-img">
+                    <div>
+                        <h4>Mercy General Hospital</h4>
+                        <p>"The SignSpeak program has transformed our patient experience, reducing miscommunication in critical care situations and empowering our deaf patients to communicate directly with medical staff."</p>
+                        <p class="impact-author">— James Wilson, Patient Experience Director</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support & Community Page -->
+    <section class="support-page" id="support" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">Support & Community</h2>
+            <p>Get help, share experiences, and connect with other SignSpeak users.</p>
+            
+            <div class="support-options">
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>Help Center</h3>
+                    <p>Browse our knowledge base, video tutorials, and troubleshooting guides.</p>
+                    <a href="#" class="btn btn-outline">Visit Help Center</a>
+                </div>
+                
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Community Forums</h3>
+                    <p>Connect with other users, share tips, and discuss your SignSpeak experience.</p>
+                    <a href="#" class="btn btn-outline">Join Discussions</a>
+                </div>
+                
+                <div class="support-card">
+                    <div class="support-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Contact Support</h3>
+                    <p>Get personalized assistance from our dedicated support team.</p>
+                    <a href="#" class="btn btn-outline">Contact Us</a>
+                </div>
+            </div>
+            
+            <div class="training-resources">
+                <h3>Training & Resources</h3>
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <div class="resource-thumbnail">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <h4>Getting Started Guide</h4>
+                        <p>Learn the basics of setting up and using your SignSpeak glove.</p>
+                        <a href="#">Watch Now</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-thumbnail">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <h4>Advanced Features Tutorial</h4>
+                        <p>Discover advanced settings and customization options.</p>
+                        <a href="#">Watch Now</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-thumbnail">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h4>User Manual</h4>
+                        <p>Complete documentation for all SignSpeak features.</p>
+                        <a href="#">Download PDF</a>
+                    </div>
+                    
+                    <div class="resource-card">
+                        <div class="resource-thumbnail">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h4>Live Webinars</h4>
+                        <p>Join our regular online training sessions with Q&A.</p>
+                        <a href="#">View Schedule</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Investor Page -->
+    <section class="investor-page" id="investors" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">For Investors</h2>
+            <p>Join us in our mission to revolutionize accessibility through innovative technology.</p>
+            
+            <div class="investor-content">
+                <div class="investor-highlights">
+                    <div class="highlight">
+                        <div class="highlight-number">70M+</div>
+                        <p>Total Addressable Market</p>
+                    </div>
+                    <div class="highlight">
+                        <div class="highlight-number">$4.8B</div>
+                        <p>Assistive Tech Market Size</p>
+                    </div>
+                    <div class="highlight">
+                        <div class="highlight-number">48%</div>
+                        <p>Annual Growth Rate</p>
+                    </div>
+                    <div class="highlight">
+                        <div class="highlight-number">8</div>
+                        <p>Patents Filed</p>
+                    </div>
+                </div>
+                
+                <div class="funding-goals">
+                    <h3>Current Funding Round</h3>
+                    <div class="funding-progress">
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 65%;"></div>
+                        </div>
+                        <div class="progress-stats">
+                            <span>$1.3M raised</span>
+                            <span>$2M goal</span>
+                        </div>
+                    </div>
+                    
+                    <h3>Allocation of Funds</h3>
+                    <div class="fund-allocation">
+                        <div class="allocation-category">
+                            <div class="allocation-name">R&D</div>
+                            <div class="allocation-bar">
+                                <div class="allocation" style="width: 40%;"></div>
+                            </div>
+                            <div class="allocation-percent">40%</div>
+                        </div>
+                        <div class="allocation-category">
+                            <div class="allocation-name">Manufacturing</div>
+                            <div class="allocation-bar">
+                                <div class="allocation" style="width: 30%;"></div>
+                            </div>
+                            <div class="allocation-percent">30%</div>
+                        </div>
+                        <div class="allocation-category">
+                            <div class="allocation-name">Marketing</div>
+                            <div class="allocation-bar">
+                                <div class="allocation" style="width: 20%;"></div>
+                            </div>
+                            <div class="allocation-percent">20%</div>
+                        </div>
+                        <div class="allocation-category">
+                            <div class="allocation-name">Operations</div>
+                            <div class="allocation-bar">
+                                <div class="allocation" style="width: 10%;"></div>
+                            </div>
+                            <div class="allocation-percent">10%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="investor-resources">
+                <h3>Investor Resources</h3>
+                <div class="investor-documents">
+                    <a href="#" class="investor-doc">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Pitch Deck</span>
+                    </a>
+                    <a href="#" class="investor-doc">
+                        <i class="fas fa-file-excel"></i>
+                        <span>Financial Projections</span>
+                    </a>
+                    <a href="#" class="investor-doc">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Market Analysis</span>
+                    </a>
+                    <a href="#" class="investor-doc">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>Technical Whitepaper</span>
+                    </a>
+                </div>
+                
+                <div class="investor-cta">
+                    <h3>Interested in Investing?</h3>
+                    <p>Schedule a meeting with our founders to discuss investment opportunities.</p>
+                    <a href="#" class="btn">Request Meeting</a>
+                </div>
+            </div>
+        </div>
+    </section>
